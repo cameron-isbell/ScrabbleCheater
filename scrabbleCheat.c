@@ -21,14 +21,12 @@ int main (int argc, char* argv[]) {
             }
             letters[i] = toupper(letters[i]);
         }
-
         FILE* dict = fopen("dictionary.txt", "r");
         
-        
 
-        char word[30];
+        char word[maxWrdLn];
         while (fgets(word, maxWrdLn, dict)) {
-            
+                
         }
         break;
 

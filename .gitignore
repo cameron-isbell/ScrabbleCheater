@@ -1,0 +1,6 @@
+!*.c
+!dictionary.txt
+
+*.exe
+*.o
+*.out
