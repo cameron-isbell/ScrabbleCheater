@@ -1,0 +1,16 @@
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.csprojAssemblyReference.cache
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.AssemblyInfoInputs.cache
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.AssemblyInfo.cs
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.csproj.CoreCompileInputs.cache
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.exe
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.deps.json
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.runtimeconfig.json
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.runtimeconfig.dev.json
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.dll
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ref\ScrabbleCheater.dll
+C:\Users\Cameron\Desktop\ScrabbleCheater\bin\Debug\net5.0\ScrabbleCheater.pdb
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.dll
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ref\ScrabbleCheater.dll
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.pdb
+C:\Users\Cameron\Desktop\ScrabbleCheater\obj\Debug\net5.0\ScrabbleCheater.genruntimeconfig.cache
