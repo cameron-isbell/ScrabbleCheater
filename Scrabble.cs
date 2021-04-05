@@ -19,13 +19,19 @@ namespace Scrabble
                 //Reading from dictionary
                 string word; 
                 while ((word = dict.ReadLine()) != null) {
-                    foreach(string s in perms) {
-                        if (s == word) match.Add(s);
+                    foreach (string s in perms) {
+                        int len = (word.Length > s.Length) ? s.Length : word.Length;
+                        string comp = s.Substring(0, len);
+                        if (String.Equals(comp, word)) {
+                            Console.WriteLine(word);
+                            match.Add(word);
+                            Console.WriteLine(match.Count);
+                        }                 
                     }
-                }
-            
+                }    
+                break;     
             }
-            dict.Close();
+            
         }
     }
 }
