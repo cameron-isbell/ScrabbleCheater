@@ -1,7 +1,8 @@
-!*.c
+!*.cs
 !dictionary.txt
 
 *.exe
 *.o
 *.out
 .vscode
+.csproj
