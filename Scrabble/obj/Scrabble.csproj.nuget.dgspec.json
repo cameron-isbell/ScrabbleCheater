@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\ScrabbleCheater.csproj": {}
+    "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\Scrabble\\Scrabble.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\ScrabbleCheater.csproj": {
+    "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\Scrabble\\Scrabble.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\ScrabbleCheater.csproj",
-        "projectName": "ScrabbleCheater",
-        "projectPath": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\ScrabbleCheater.csproj",
+        "projectUniqueName": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\Scrabble\\Scrabble.csproj",
+        "projectName": "Scrabble",
+        "projectPath": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\Scrabble\\Scrabble.csproj",
         "packagesPath": "C:\\Users\\Cameron\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\obj\\",
+        "outputPath": "C:\\Users\\Cameron\\Desktop\\ScrabbleCheater\\Scrabble\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
