@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using System.Collections.Generic;
 
 namespace Scrabble
@@ -19,7 +18,6 @@ namespace Scrabble
 
                 List<string> perms = Permutations.Start(letters);
                 List<string> match = new List<string>();
-
                 
                 //Reading from dictionary
                 string word; 
@@ -31,7 +29,7 @@ namespace Scrabble
                             Console.WriteLine(word);
                             match.Add(word);
                             Console.WriteLine(match.Count);
-                        }                 
+                        }
                     }
                 }    
                 break;     

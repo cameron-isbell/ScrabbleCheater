@@ -1,6 +1,8 @@
 !*.cs
 !dictionary.txt
 
+**/obj
+**/bin
 *.exe
 *.o
 *.out
