@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrabble", "Scrabble\Scrabb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board", "Board\Board.csproj", "{50414AB5-20B6-499B-9E8E-38D8F365B0C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{400CD725-E935-4988-860D-4A10583CB94D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{50414AB5-20B6-499B-9E8E-38D8F365B0C2}.Release|x64.Build.0 = Release|Any CPU
 		{50414AB5-20B6-499B-9E8E-38D8F365B0C2}.Release|x86.ActiveCfg = Release|Any CPU
 		{50414AB5-20B6-499B-9E8E-38D8F365B0C2}.Release|x86.Build.0 = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|x64.Build.0 = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Debug|x86.Build.0 = Debug|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|x64.ActiveCfg = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|x64.Build.0 = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|x86.ActiveCfg = Release|Any CPU
+		{400CD725-E935-4988-860D-4A10583CB94D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Board;
 
 namespace Scrabble
 {
@@ -9,27 +10,15 @@ namespace Scrabble
 
         static void Main(string[] args) 
         {
-            LetterValLUT = new Dictionary<char,int>()
-            {
-                {'A', 1}, {'B', 3}, {'C', 3}, {'D', 2}, {'E', 1}, {'F', 4},
-                {'G', 2}, {'H', 4}, {'I', 1}, {'J', 8}, {'K', 5}, {'L', 1},
-                {'M', 3}, {'N', 1}, {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1},
-                {'S', 1}, {'T', 1}, {'U', 1}, {'V', 4}, {'W', 4}, {'X', 8},
-                {'Y', 4}, {'Z', 10}
-            };
-            while (true) {
-                string letters = Console.ReadLine();
-                string word = GetHighestValue(letters);
-            }
+            Board GameBoard = new Board();
+
+            string letters = Console.ReadLine();
+            Tile[] Word = GetHighestValue(letters);   
         }
         
-        static string GetHighestValue(string letters) 
+        static Tile[] GetHighestValue(string letters) 
         {
-            //TODO: use thread for this
-            System.IO.StreamReader dict = new System.IO.StreamReader("Scrabble/dictionary.txt");
-            
-            //max value, string corresponding to it
-            Tuple<string, int> max = new Tuple<string, int>("", 0);
+            System.IO.StreamReader Dict = new System.IO.StreamReader("Scrabble/dictionary.txt");
  
             if (letters.Length > 8 || letters.Length < 1) {
                 Console.WriteLine("INVALID CHARACTER AMOUNT");
@@ -39,28 +28,49 @@ namespace Scrabble
             List<string> perms = Permutations.Start(letters);
             List<string> match = new List<string>();
             
+            //removing duplicates
+            foreach (string s in perms) {
+                //delete all occurrences, then add one back in
+                string temp = s;
+                perms.RemoveAll(s);
+                perms.Add(temp);
+            }
+            
             //Reading from dictionary
-            string word; 
-            while ((word = dict.ReadLine()) != null) {
-                foreach (string s in perms) {
-                    int len = (word.Length > s.Length) ? s.Length : word.Length;
+            string line; 
+            foreach (string s in perms) {
+                while ((line = Dict.ReadLine()) != null) {
+                    //not yet at correct first letter, continue
+                    if (line[0] < s[0]) continue;
+
+                    //we've passed the range of characters, stop searching
+                    if (line[0] > s[0]) break;
+                    
+                    int len = (line.Length < s.Length) ? line.Length : s.Length;
                     string comp = s.Substring(0, len);
-                    if (String.Equals(comp, word)) {
-                        match.Add(word);
-                    }
+                    if (String.Equals(comp, line)) match.Add(line);
                 }
             }
+            Dict.Close();
+            
+            //highest value string, value
+            Tuple<string, int> Max = new Tuple<string, int>("", 0);
 
             foreach(string s in match) {
                 int sum = 0; 
-                foreach(char c in s) sum += LetterValLUT[c];
-                if (sum > max.Item2) max = new Tuple<string, int>(s, sum);
-
-                Console.WriteLine("possible {0}", s);
+                foreach(char c in s) {
+                    Tile CurTile = new Tile(c); 
+                    sum += CurTile.Val;
+                }
+                if (sum > Max.Item2) Max = new Tuple<string, int>(s, sum);
             }
-            Console.WriteLine("str {0} val {1}", max.Item1, max.Item2);
 
-            return max.Item1;
+            Tile[] Word = new Tile[];
+            for (int i = 0; i < Max.Item1.Length; i++) {
+                Tile[i] = new Tile(Max.Item1[i]);
+            }
+
+            return Word;
         }
     }
 }
