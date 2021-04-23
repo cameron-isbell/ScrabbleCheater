@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scrabble
+namespace Scrabble_Player
 {
     class Permutations 
     {

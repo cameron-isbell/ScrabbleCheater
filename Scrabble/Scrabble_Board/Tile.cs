@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Board 
+namespace Scrabble_Board 
 {
     /**
         A tile of the scrabble board
