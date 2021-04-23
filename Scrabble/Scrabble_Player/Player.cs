@@ -8,12 +8,12 @@ namespace Scrabble_Player
     {
         private const int MAX_LETTERS = 8;
         public bool IsAI { get; }
-        //private string[] dict;
+        private string[] AllDictWords;
 
         public Player(bool IsAI) 
         {
             this.IsAI = IsAI;
-            //dict = System.IO.File.ReadAllLines("Player/dictionary.txt");
+            AllDictWords = System.IO.File.ReadAllLines("Scrabble_Player/dictionary.txt");
         }
 
         public void PlayMove(Board GameBoard)
@@ -26,14 +26,11 @@ namespace Scrabble_Player
                 foreach(Tile t in word) {
                     Console.Write(t.Letter);
                 }
-                //GameBoard.Place();
             }
         }
 
         private Tile[] GetHighestValue()
         {
-            System.IO.StreamReader dict = new System.IO.StreamReader("Player/dictionary.txt");
- 
             //TODO: PULL TILES
             string letters = "abcdefgh";
             if (letters.Length > MAX_LETTERS || letters.Length < 1) {
@@ -52,24 +49,18 @@ namespace Scrabble_Player
             //     perms.Add(temp);
             // }
 
-            //Reading from dictionary
-            //TODO: BINARY SEARCH 
-            string line; 
-            foreach (string s in perms) {
-                while ((line = dict.ReadLine()) != null) {
-                    //not yet at correct first letter, continue
-                    if (line[0] < s[0]) continue;
 
-                    //we've passed the range of characters, stop searching
-                    if (line[0] > s[0]) break;
-                    
-                    int len = (line.Length < s.Length) ? line.Length : s.Length;
-                    string comp = s.Substring(0, len);
-                    if (String.Equals(comp, line)) match.Add(line);
+            //Check each permutation
+            foreach(string s in perms) {
+                //Check each substring
+                string check = "";
+                foreach (char c in s) {
+                    check += c;
+                    if (BinSearchDict(check, AllDictWords.Length/2)) match.Add(check);
                 }
             }
-            dict.Close();
             
+            BinSearchDict("pass", AllDictWords.Length/2);
             //highest value string, value
             Tuple<Tile[], int> Max = new Tuple<Tile[], int>(new Tile[MAX_LETTERS], 0);
 
@@ -84,6 +75,24 @@ namespace Scrabble_Player
             }
 
             return Max.Item1;
+        }
+
+        /*
+            @param find: string representing the data the binary search is searching for
+            @param pivot: the index to pivot left and right check around
+        */
+        private bool BinSearchDict(string find, int pivot)
+        {          
+            //check left/right depending on preceeding or suceeding
+            if (find.CompareTo(AllDictWords[pivot]) < 0) {
+                BinSearchDict(find, pivot/2);
+            }
+            else if (find.CompareTo(AllDictWords[pivot]) > 0) {
+                BinSearchDict(find, pivot + (pivot/2));
+            }
+            else if (find == AllDictWords[pivot]) return true;
+            
+            return false;
         }
     }
 }
