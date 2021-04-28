@@ -8,8 +8,10 @@ namespace Scrabble_Player
     class Player
     {
         private const int MAX_LETTERS = 8;
-        public bool IsAI { get; }
         private string[] AllDictWords;
+
+        public bool IsAI { get; }
+        public List<Tile> Inventory { get; }
 
         public Player(bool IsAI) 
         {
@@ -19,7 +21,10 @@ namespace Scrabble_Player
 
         public void PlayMove(Board GameBoard)
         {
+            PullTiles(GameBoard);
             if (!IsAI) {
+                
+
                 return;
             }
             else {
@@ -27,20 +32,25 @@ namespace Scrabble_Player
             }
         }
 
+        private void PullTiles(Board GameBoard) 
+        {
+            while (!(Inventory.Count < MAX_LETTERS)) {
+                Tile NewTile = GameBoard.PopPile();
+                if (NewTile == null) break;
+                Inventory.Add(NewTile);
+            }        
+        }
+
         private Tile[] GetHighestValue()
         {
-            //TODO: PULL TILES
-            string letters = "azpclunk";
-            if (letters.Length > MAX_LETTERS || letters.Length < 1) {
-                Console.WriteLine("INVALID CHARACTER AMOUNT");
-                return null;
+            string letters = "";
+            foreach (Tile t in Inventory) {
+                letters += t.Letter;
             }
 
+            //find all permutations of the letters pulled
             List<string> perms = Permutations.Start(letters);
             List<string> match = new List<string>();
-
-            // string[] DEBUG = {"aba", "ong", "ial", "xnz", "azb", "jal"};
-            // List<string> DEBUG_LIST = new List<string>(DEBUG);
 
             //Check each permutation
             foreach(string s in perms) {
@@ -99,7 +109,6 @@ namespace Scrabble_Player
             else if (find.CompareTo(comp) > 0) {
                 return BinSearchDict(find, pivot+1, high);
             }
-
             return false;
         }
     }

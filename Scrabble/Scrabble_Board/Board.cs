@@ -5,7 +5,7 @@ namespace Scrabble_Board
 {
     class Board
     {
-        public Stack<Tile> TilePile { get; set; }
+        private Stack<Tile> TilePile;
 
         private const int ROW_SIZE = 15;
         private const int COL_SIZE = 15;
@@ -14,6 +14,7 @@ namespace Scrabble_Board
 
         public Board() 
         {
+            MakePile();
             tiles = new Tile[ROW_SIZE, ROW_SIZE];
             //TODO: implement modifiers
             for (int i = 0; i < ROW_SIZE; i++) {
@@ -34,44 +35,65 @@ namespace Scrabble_Board
             if (x > ROW_SIZE || y > ROW_SIZE) return;
             tiles[x, y] = t;
         }
+
+        public Tile PopPile() {
+            return TilePile.Pop();
+        }
         
         //https://en.wikipedia.org/wiki/Scrabble_letter_distributions
         private void MakePile() 
         {
-            TilePile = new Stack<Tile>();
-            for (int i = 0; i < 12; i++) TilePile.Push(new Tile('E'));
+            List<Tile> BasePile = new List<Tile>();
+
+            for (int i = 0; i < 12; i++) BasePile.Add(new Tile('E'));
             for (int i = 0; i < 9; i++) {
-                TilePile.Push(new Tile('A'));
-                TilePile.Push(new Tile('I'));
+                BasePile.Add(new Tile('A'));
+                BasePile.Add(new Tile('I'));
             }
-            for (int i = 0; i < 8; i++) TilePile.Push(new Tile('O'));
+            for (int i = 0; i < 8; i++) BasePile.Add(new Tile('O'));
             for (int i = 0; i < 6; i++) {
-                TilePile.Push(new Tile('N'));
-                TilePile.Push(new Tile('R'));
-                TilePile.Push(new Tile('T'));
+                BasePile.Add(new Tile('N'));
+                BasePile.Add(new Tile('R'));
+                BasePile.Add(new Tile('T'));
             }
             for (int i = 0; i < 4; i++) {
-                TilePile.Push(new Tile('L'));
-                TilePile.Push(new Tile('S'));
-                TilePile.Push(new Tile('U'));
-                TilePile.Push(new Tile('D'));
+                BasePile.Add(new Tile('L'));
+                BasePile.Add(new Tile('S'));
+                BasePile.Add(new Tile('U'));
+                BasePile.Add(new Tile('D'));
             }
+            for (int i = 0; i < 3; i++) BasePile.Add(new Tile('G'));
             for (int i = 0; i < 2; i++) {
-                TilePile.Push(new Tile('B'));
-                TilePile.Push(new Tile('C'));
-                TilePile.Push(new Tile('M'));
-                TilePile.Push(new Tile('P'));
-                TilePile.Push(new Tile('F'));
-                TilePile.Push(new Tile('H'));
-                TilePile.Push(new Tile('V'));
-                TilePile.Push(new Tile('W'));
-                TilePile.Push(new Tile('Y'));
+                BasePile.Add(new Tile('B'));
+                BasePile.Add(new Tile('C'));
+                BasePile.Add(new Tile('M'));
+                BasePile.Add(new Tile('P'));
+                BasePile.Add(new Tile('F'));
+                BasePile.Add(new Tile('H'));
+                BasePile.Add(new Tile('V'));
+                BasePile.Add(new Tile('W'));
+                BasePile.Add(new Tile('Y'));
             }
-            TilePile.Push(new Tile('K'));
-            TilePile.Push(new Tile('J'));
-            TilePile.Push(new Tile('X'));
-            TilePile.Push(new Tile('Q'));
-            TilePile.Push(new Tile('Z'));
+            BasePile.Add(new Tile('K'));
+            BasePile.Add(new Tile('J'));
+            BasePile.Add(new Tile('X'));
+            BasePile.Add(new Tile('Q'));
+            BasePile.Add(new Tile('Z'));
+
+            TilePile = ShuffleTiles(BasePile);
+        }
+
+        //Fisher-Yates https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+        private Stack<Tile> ShuffleTiles(List<Tile> Shuffle) 
+        {
+            Random r = new Random();
+            for (int i = Shuffle.Count-1; i > 0; i--) {
+                int j = r.Next(0, i);
+                Tile temp = Shuffle[i];
+                Shuffle[i] = Shuffle[j];
+                Shuffle[j] = temp;
+            }
+            return new Stack<Tile>(Shuffle);
         }
     }
 }
