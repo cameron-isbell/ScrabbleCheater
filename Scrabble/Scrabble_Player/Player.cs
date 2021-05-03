@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Scrabble_Board;
 
@@ -15,27 +14,26 @@ namespace Scrabble_Player
 
         public Player(bool IsAI) 
         {
+            Inventory = new List<Tile>();
             this.IsAI = IsAI;
             AllDictWords = System.IO.File.ReadAllLines("Scrabble/Scrabble_Player/dictionary.txt");
         }
 
-        public void PlayMove(Board GameBoard)
+        public void PlayMove(Board gameBoard)
         {
-            PullTiles(GameBoard);
+            PullTiles(gameBoard);
             if (!IsAI) {
                 
-
-                return;
             }
             else {
                 Tile[] word = GetHighestValue();
             }
         }
 
-        private void PullTiles(Board GameBoard) 
+        private void PullTiles(Board gameBoard) 
         {
-            while (!(Inventory.Count < MAX_LETTERS)) {
-                Tile NewTile = GameBoard.PopPile();
+            while (Inventory.Count < MAX_LETTERS) {
+                Tile NewTile = gameBoard.PopPile();
                 if (NewTile == null) break;
                 Inventory.Add(NewTile);
             }        
@@ -50,31 +48,36 @@ namespace Scrabble_Player
 
             //find all permutations of the letters pulled
             List<string> perms = Permutations.Start(letters);
-            List<string> match = new List<string>();
 
-            //Check each permutation
+            List<string> fullPerms = new List<string>();
+
+            //Create substrings from each permutation
             foreach(string s in perms) {
                 //Check each substring
                 string check = "";
                 foreach (char c in s) {
                     check += c;
-                    if (BinSearchDict(check, 0, AllDictWords.Length)) match.Add(check);
+                    fullPerms.Add(check);
                 }
             }
 
-            //remove duplicates from match. don't waste time processing already checked strings
-            List<string> noDupes = new List<string>();
-            string[] sorted = HeapSort.Sort(match);
+            //all words sorted. used later to remove duplicate items
+            string[] sorted = HeapSort.Sort(fullPerms);
+
+            //holds all words we find in the dictionary with our set of letters
+            List<string> match = new List<string>();
+
+            //duplicate items will be next to each other when sorted. skip duplicates
             for (int i = 0; i < sorted.Length; i++) {
-                noDupes.Add(sorted[i]);
-                while ( !(i+1 >= sorted.Length) && sorted[i] == sorted[i+1]) i++;
+                if (BinSearchDict(sorted[i], 0, AllDictWords.Length)) match.Add(sorted[i]);
+                while (!(i+1 > sorted.Length-1) && sorted[i] == sorted[i+1]) i++;
             }
 
             //highest value string, value
             Tuple<Tile[], int> Max = new Tuple<Tile[], int>(new Tile[MAX_LETTERS], 0);
 
-            foreach(string s in noDupes) {
-                int sum = 0; 
+            foreach(string s in match) {
+                int sum = 0;
                 Tile[] curWord = new Tile[MAX_LETTERS];
                 for(int i = 0; i < s.Length; i++) {
                     curWord[i] = new Tile(s[i]); 

@@ -16,6 +16,7 @@ namespace Scrabble_Board
         {
             MakePile();
             tiles = new Tile[ROW_SIZE, ROW_SIZE];
+
             //TODO: implement modifiers
             for (int i = 0; i < ROW_SIZE; i++) {
                 for (int j = 0; j < ROW_SIZE; j++) {
@@ -26,13 +27,17 @@ namespace Scrabble_Board
 
         public Tile GetTile(int x, int y)
         {
-            if (x > ROW_SIZE || y > ROW_SIZE) return null;
+            if (x > ROW_SIZE || y > ROW_SIZE || x < 0 || y < 0) return null;
             return tiles[x, y];
         }
 
         public void SetTile(int x, int y, Tile t) 
         {
-            if (x > ROW_SIZE || y > ROW_SIZE) return;
+            if (x > ROW_SIZE || y > ROW_SIZE || x < 0 || y < 0) {
+                Console.WriteLine("INVALID PLACEMENT");
+                return;
+            }
+
             tiles[x, y] = t;
         }
 

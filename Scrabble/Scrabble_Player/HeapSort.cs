@@ -10,58 +10,55 @@ namespace Scrabble_Player
         /*
             Public function for Player to call. 
             Returns an array of string from max -> min. 
+            TODO: NO IDEA WHY, BUT IT'S MAKING A MIN HEAP
+                    doesn't matter too much, but still worth looking into
         */
+
         public static string[] Sort(List<string> SortMe)
         {
+            //init heap
             Heap = new string[SortMe.Count];
             for (int i = 0; i < SortMe.Count; i++) {
                 Heap[i] = SortMe[i];
             }
-            
-            string[] sorted = new string[Heap.Length];
-            for (int i = 0; i < SortMe.Count; i++) {
-                Heapify((Heap.Length-1) - i, Heap);
-                sorted[i] = Pull(i);
+
+            //Build initial max heap
+            for (int i = Heap.Length / 2 - 1; i >= 0; i--) {
+                Heapify(Heap.Length, i);
             }
 
-            return sorted;
+            for (int i = Heap.Length-1; i >= 0; i--) {
+                Swap(0, i);
+                Heapify(i, 0);
+            }
+            return Heap;
         }
 
         /*
-            Push maximum string to the root node.
+            Create a max heap.
+            Compare the root (max) to its left and right children
+                if root < child: swap(child, root)
         */
-        private static void Heapify(int pos, string[] arr) 
+        private static void Heapify(int n, int i) 
         {
-            int right = pos;
-            int left = right-1;
-            int root = (right-1) / 2;
+            int max = i;
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
 
-            //determine which child node is larger
-            int comp;
-            if (left < 0) comp = right;
-            else comp = (Heap[right].CompareTo(Heap[left]) > 0) ? right : left;
+            if (left < n && Heap[left].CompareTo(Heap[max]) > 0) max = left;
+            if (right < n && Heap[right].CompareTo(Heap[max]) > 0) max = right;
 
-            if (Heap[comp].CompareTo(Heap[root]) > 0) {
-                string temp = Heap[comp];
-                Heap[comp] = Heap[root];
-                Heap[root] = temp;
+            if (max != i) {
+                Swap(i, max);
+                Heapify(n, max);
             }
-            
-            //if no more nodes, return up.
-            if (pos-2 < 0) return;
-            Heapify(pos-2, Heap);
         }
 
-        /*
-            Remove and return the root node. 
-        */
-        private static string Pull(int numRm)
+        private static void Swap(int i1, int i2)
         {
-            string temp = Heap[0];
-            Heap[0] = Heap[(Heap.Length-1)-numRm];
-            Heap[(Heap.Length-1)-numRm] = temp;
-
-            return temp;
+            string temp = Heap[i1];
+            Heap[i1] = Heap[i2];
+            Heap[i2] = temp;
         }
     }
 }
