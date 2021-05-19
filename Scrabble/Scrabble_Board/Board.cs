@@ -7,8 +7,8 @@ namespace Scrabble_Board
     {
         private Stack<Tile> TilePile;
 
-        private const int ROW_SIZE = 15;
-        private const int COL_SIZE = 15;
+        public const int ROW_SIZE = 15;
+        public const int COL_SIZE = 15;
         
         private Tile[,] tiles;
 

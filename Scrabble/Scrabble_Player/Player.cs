@@ -85,7 +85,6 @@ namespace Scrabble_Player
                 }
                 if (sum > Max.Item2) Max = new Tuple<Tile[], int>(curWord, sum);
             }
-
             return Max.Item1;
         }
 
